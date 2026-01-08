@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Courses Store | Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"> <!-- For icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"> <!-- Google Fonts -->
+    <style>
+        :root {
+            --primary-bg: linear-gradient(135deg, #0f172a, #1e293b);
+            --secondary-bg: #f8fafc;
+            --accent-color: #16a34a;
+            --text-color: #1e293b;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--secondary-bg);
+        }
+        
+        .hero {
+            background: var(--primary-bg);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            opacity: 0.1;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            opacity: 0.9;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .badges {
+            margin-top: 30px;
+            z-index: 1;
+            position: relative;
+        }
+        
+        .badges span {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 20px;
+            margin: 5px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        
+        .badges span:hover {
+            transform: scale(1.05);
+        }
+        
+        .section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .product {
+            background: #fff;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .product img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+        }
+        
+        .product h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .product .price {
+            font-size: 20px;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .product button {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        
+        .product button:hover {
+            background: #15803d;
+            transform: scale(1.05);
+        }
+        
+        .about {
+            background: #fff;
+            text-align: center;
+        }
+        
+        .about p {
+            font-size: 18px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #64748b;
+        }
+        
+        .testimonials {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial {
+            background: #fff;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial cite {
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        
+        .faq {
+            background: #fff;
+        }
+        
+        .faq-item {
+            background: var(--secondary-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-item h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .faq-item p {
+            color: #64748b;
+        }
+        
+        .contact {
+            background: var(--primary-bg);
+            color: #fff;
+            text-align: center;
+        }
+        
+        .contact h2 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .contact p {
+            margin-bottom: 30px;
+        }
+        
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        input, textarea {
+            padding: 12px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        button[type="submit"] {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        button[type="submit"]:hover {
+            background: #15803d;
+        }
+        
+        .demo-note {
+            background: #fff7ed;
+            border-left: 5px solid #f97316;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 900px;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        
+        .demo-note h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #f97316;
+        }
+        
+        .demo-note p {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .whatsapp-cta {
+            background: var(--accent-color);
+            color: #fff;
+            padding: 18px 32px;
+            font-size: 18px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        
+        .whatsapp-cta:hover {
+            background: #15803d;
+            transform: scale(1.05);
+        }
+        
+        footer {
+            background: var(--text-color);
+            color: #cbd5e1;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+        
+        footer .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        footer .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin-bottom: 20px;
+        }
+        
+        footer h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: var(--accent-color);
+        }
+        
+        footer .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            font-size: 18px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .products, .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .product, .testimonial {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <h1>Online Courses Store</h1>
+        <p>Sell Courses • Accept Enquiries • Grow Your Business</p>
+
+        <div class="badges">
+            <span><i class="fas fa-mobile-alt" aria-hidden="true"></i> Mobile Friendly</span>
+            <span><i class="fas fa-bolt" aria-hidden="true"></i> Fast Loading</span>
+            <span><i class="fas fa-search" aria-hidden="true"></i> SEO Ready</span>
+            <span><i class="fab fa-whatsapp" aria-hidden="true"></i> WhatsApp Order</span>
+        </div>
+    </section>
+
+    <!-- COURSES -->
+    <section class="section products">
+        <h2 class="section-title">Popular Courses</h2>
+        <div class="product">
+            <img src="https://via.placeholder.com/300x200?text=Manual+Testing" alt="Manual Testing Course Image">
+            <h3>Manual Testing</h3>
+            <p class="price">₹40,000</p>
+            <button>Buy Now</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/300x200?text=Core+Java" alt="Core Java Course Image">
+            <h3>Core Java</h3>
+            <p class="price">₹40,000</p>
+            <button>Buy Now</button>
+        </div>
+
+        <div class="product">
+            <img src="https://via.placeholder.com/300x200?text=Selenium" alt="Selenium Course Image">
+            <h3>Selenium</h3>
+            <p class="price">₹10,000</p>
+            <button>Add to Cart</button>
+        </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section class="section about">
+        <h2 class="section-title">About Us</h2>
+        <p>We are a leading provider of high-quality online courses in software testing, programming, and more. Our expert instructors ensure you gain practical skills to advance your career. Join thousands of learners worldwide and transform your future today!</p>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section testimonials">
+        <h2 class="section-title">What Our Students Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <p>"The Manual Testing course was incredibly detailed and practical. I landed a job right after completing it!"</p>
+                <cite>- Priya Sharma, Software Tester</cite>
+            </div>
+            <div class="testimonial">
+                <p>"Core Java course helped me build a strong foundation. Highly recommend for beginners!"</p>
+                <cite>- Rahul Kumar, Developer</cite>
+            </div>
+            <div class="testimonial">
+                <p>"Selenium course is a game-changer for automation testing. Easy to follow and effective."</p>
+                <cite>- Anjali Patel, QA Engineer</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h4>Are the courses self-paced?</h4>
+            <p>Yes, all our courses are self-paced, allowing you to learn at your own speed with lifetime access.</p>
+        </div>
+        <div class="faq-item">
+            <h4>Do you offer certificates?</h4>
+            <p>Absolutely! Upon completion, you'll receive a certificate to showcase your skills.</p>
+        </div>
+        <div class="faq-item">
+            <h4>What payment methods do you accept?</h4>
+            <p>We accept credit cards, UPI, and other secure payment options. Contact us for more details.</p>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section contact">
+        <h2>Contact Us</h2>
+        <p>Have questions? Get in touch with us!</p>
+        <form action="#" method="post">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- DEMO NOTE -->
+    <div class="demo-note">
+        <h3>⚠️ This is a Demo Website</h3>
+        <p>
+            Final website will be delivered with your brand name, logo, colors,
+            payment options and content.
+        </p>
+
+        <a class="whatsapp-cta"
+           href="https://wa.me/91XXXXXXXXXX?text=Hi,%20I%20saw%20your%20premium%20course%20website%20demo%20and%20want%20to%20order">
+           <i class="fab fa-whatsapp" aria-hidden="true"></i> Order This Website on WhatsApp
+        </a>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    <a href="#"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p>Email: info@coursestore.com</p>
+                <p>Phone: +91-XXXXXXXXXX</p>
+            </div>
+        </div>
+        <p>&copy; 2023 Online Courses Store. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
